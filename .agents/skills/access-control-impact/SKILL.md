@@ -46,6 +46,17 @@ Do not re-trace generic BFF or S2S token plumbing unless a route differs from th
 7. Create a cited pack at `<investigation-root>/docs/packs/<endpoint-slug>.md` from [endpoint-pack.md](endpoint-pack.md), and update its row in `<investigation-root>/docs/registry.md`.
 8. Set the verdict to `Insufficient evidence` when any layer is unverified.
 
+## Delegation
+
+Delegate only when the batch has two or more independent endpoint families, or more than two endpoints. Do not launch one research agent per layer per endpoint.
+
+1. Collect shared mapping once (Platform Lua `feature()`, Protected API route, `PermissionMap.cs` entitlement) and put it in each research-agent prompt. Do not create a separate catalogue file.
+2. Dispatch one **read-only** research agent per endpoint family (typically 3–5 endpoints that share a product or BFF pattern). Give absolute repository paths and exact endpoint scope.
+3. Keep one **coordinator** as the only writer of packs and `docs/registry.md`. Research agents return evidence handoffs; they must not set `No expected user impact`.
+4. Dispatch a **reviewer** only for packs with `Conflict`, `Missing`, `Alias`, `Partially gated`, or `Ungated`. Fully cited packs without those statuses go to the human batch review.
+
+Read [reference.md](reference.md) for the evidence-handoff format and interference rules.
+
 ## Review rules
 
 - Use only the template mapping statuses and cite every `Matched` or `Not applicable` value.
@@ -59,4 +70,4 @@ Return the updated evidence packs, registry rows, unresolved findings, and each 
 
 ## Reference
 
-Read [reference.md](reference.md) for the full baseline, reconciliation guidance, discrepancy policy, and batch-review procedure. Use [endpoint-pack.md](endpoint-pack.md) as the pack skeleton.
+Read [reference.md](reference.md) for the full baseline, UI/BFF procedure, discrepancy policy, batch-review procedure, and subagent delegation. Use [endpoint-pack.md](endpoint-pack.md) as the pack skeleton.

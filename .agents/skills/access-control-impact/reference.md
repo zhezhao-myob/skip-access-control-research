@@ -99,3 +99,54 @@ Work in batches of five to eight endpoint packs:
 4. Wait for review before beginning the next batch.
 
 The batch boundary is a review control, not permission to carry unresolved findings into a `No expected user impact` verdict.
+
+## Subagent delegation
+
+Use subagents for cost and quality only when work is independent. Do not split Platform, BFF, and UI into three agents for the same endpoint: each agent re-orients on the same repositories and the conclusions drift.
+
+### When to delegate
+
+- At least two independent endpoint families in the batch, or more than two endpoints.
+- Endpoint families share a product, BFF module, or Lua adapter pattern and do not require each other's pack verdicts.
+
+Do not delegate when there is a single endpoint, when families share unresolved mapping questions, or when agents would write the same files.
+
+### Roles
+
+| Role | Scope | Writes |
+| --- | --- | --- |
+| Coordinator (this session) | Shared mapping, family grouping, pack synthesis, verdicts | `docs/packs/`, `docs/registry.md` |
+| Research agent | One endpoint family: callers, tenant propagation, UI/BFF gate | None (read-only on application repos and investigation docs except its report file) |
+| Reviewer | Packs whose status includes `Conflict`, `Missing`, `Alias`, `Partially gated`, or `Ungated` | None |
+
+Research agents must not conclude `No expected user impact`. The coordinator sets the verdict only after reconciling all layers, including Lua and `PermissionMap.cs`. A UI/BFF classification of `Gated` is impact evidence only.
+
+### Shared mapping
+
+Before launching research agents, the coordinator collects Lua `feature()`, Protected API route, and `PermissionMap.cs` entitlement for the family (from existing packs, `docs/registry.md`, or a first pass in this session). Put that mapping in the research prompt so agents do not re-discover it unless a row is `Missing` or `Conflict` and the coordinator asked them to resolve it.
+
+Do not maintain a separate mapping-catalogue file. Persist mapping in the pack and registry after synthesis.
+
+### Evidence handoff
+
+Each research agent returns one block per endpoint, no pack files:
+
+```text
+Endpoint:
+Layer:
+Observed value:
+Exact source path + symbol:
+Search scope:
+Status:
+Reasoning:
+Open question:
+```
+
+Cover at least: callers, tenant identifier propagation, and the UI/BFF eligibility-gate checks. Cite file paths and symbols. If a search found nothing, state repositories, paths, and terms searched.
+
+### Interference rules
+
+- Research agents work in parallel only across families; they do not edit `docs/registry.md` or `docs/packs/`.
+- The coordinator writes packs and registry rows after all family reports for the batch are in.
+- Reviewer agents read packs and reports; they do not rewrite application code.
+- Absolute paths to all six repositories and the investigation root appear in every research prompt.
