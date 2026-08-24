@@ -10,5 +10,5 @@ AccountRight Protected API `PermissionMap.cs`, BFF feature calculation, and
 web UI gating. Any missing or conflicting mapping is a finding and blocks a
 `No expected user impact` verdict.
 
-Investigation method: `.cursor/skills/access-control-impact/`.
+Investigation method: `.agents/skills/access-control-impact/`.
 Human-review artefacts: `docs/registry.md`, `docs/packs/`, `docs/reference/`.

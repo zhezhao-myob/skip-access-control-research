@@ -13,6 +13,50 @@ Per-endpoint analysis traces callers, effective feature mapping, tenant-identifi
 propagation, and existing UI/BFF eligibility gates. Write human-review artefacts
 to `<investigation-root>/docs/packs/` and `<investigation-root>/docs/registry.md`.
 
+## UI/BFF eligibility-gate procedure
+
+Reporting Web sends the user's access token and ID token as credentials, together
+with the selected business context. It does not send roles or entitlements. The
+BFF uses that context to obtain the business's `current-user` record and role
+list through the platform gateway, derives the user's entitlement list, then
+returns the resulting `enabledFeatures` list to Reporting Web.
+
+Treat this as the standard investigation path for both Reporting Backends and
+SME Web BFF unless the endpoint's implementation shows otherwise. Do not assume
+that similarly named transformers or feature keys are equivalent; cite the
+actual route and mapping evidence for the endpoint.
+
+For each endpoint, determine and record:
+
+1. **Business context** — the selected business/company-file identifier supplied
+   to the BFF and the identifier used for `current-user` and role lookup.
+2. **Role evaluation** — the BFF code that matches the current user's role IDs
+   to the selected business's roles and derives entitlements.
+3. **Feature evaluation** — the entitlement-to-`enabledFeatures` mapping,
+   including applicable subscription or region filters.
+4. **Product gate** — the web widget, navigation item, SPA route, or BFF route
+   that tests the required enabled feature before requesting endpoint data.
+5. **Endpoint alignment** — whether the feature used by that gate represents
+   the same effective access as the Platform Lua feature and the Protected API
+   `PermissionMap.cs` entitlement.
+
+Classify the UI/BFF layer as:
+
+- `Gated` — cited server-side feature calculation and a cited UI/BFF gate both
+  require the aligned feature.
+- `Partially gated` — a feature is calculated or tested, but a caller, route,
+  or method variant can bypass the gate.
+- `Ungated` — a user-facing caller reaches the endpoint without a matching
+  feature gate.
+- `Not applicable` — cited evidence establishes that no web/BFF caller exists.
+- `Insufficient evidence` — the business context, feature mapping, or gate
+  cannot be verified.
+
+The UI/BFF classification is evidence about expected user impact, not request
+authorization. A `Gated` result does not replace the downstream check for the
+verified user, the effective entitlement, and access to the requested
+business/company-file.
+
 ## Mapping layers
 
 Reconcile these four layers for every endpoint:

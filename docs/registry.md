@@ -2,7 +2,7 @@
 
 Batch-review index for SME Platform API endpoints under skip-access-control
 investigation. The established request baseline and pack template live in
-`.cursor/skills/access-control-impact/`.
+`.agents/skills/access-control-impact/`.
 
 | Endpoint | Product / feature | Callers | UI/BFF gate | Mapping status | Verdict | Residual risk | Evidence pack | Reviewer |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |

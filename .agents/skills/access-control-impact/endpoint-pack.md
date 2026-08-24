@@ -50,6 +50,22 @@ and access to the requested business/company-file.
 
 ## Tenant identifier propagation
 
+## UI/BFF eligibility-gate check
+| Check | Observed value | Source evidence | Classification |
+| --- | --- | --- | --- |
+| Business context used for `current-user` and roles | | | |
+| User role IDs mapped to business roles and entitlements | | | |
+| Entitlement-to-`enabledFeatures` calculation and filters | | | |
+| Web widget, SPA route, or BFF route gate | | | |
+| Endpoint feature alignment | | | |
+
+**UI/BFF classification:** `Gated` / `Partially gated` / `Ungated` /
+`Not applicable` / `Insufficient evidence`
+
+UI/BFF gating is user-impact evidence only. It does not replace downstream
+authorization for the verified user, effective entitlement, and requested
+business/company-file.
+
 ## Mapping reconciliation
 | Layer | Observed value | Source evidence | Status |
 | --- | --- | --- | --- |

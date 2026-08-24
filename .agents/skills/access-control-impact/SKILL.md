@@ -39,9 +39,12 @@ Do not re-trace generic BFF or S2S token plumbing unless a route differs from th
 2. For each endpoint, locate the SME Platform Lua route and its `feature()`.
 3. Locate the Protected API route and `PermissionMap.cs` entitlement mapping.
 4. Trace every caller and UI/BFF eligibility gate in the supplied repositories.
-5. Reconcile the Lua feature, Protected API entitlement, BFF feature calculation, and Web UI/route gate.
-6. Create a cited pack at `<investigation-root>/docs/packs/<endpoint-slug>.md` from [endpoint-pack.md](endpoint-pack.md), and update its row in `<investigation-root>/docs/registry.md`.
-7. Set the verdict to `Insufficient evidence` when any layer is unverified.
+5. Apply the UI/BFF eligibility-gate procedure in [reference.md](reference.md):
+   business context → role evaluation → entitlements → `enabledFeatures` →
+   product gate → endpoint-feature alignment.
+6. Reconcile the Lua feature, Protected API entitlement, BFF feature calculation, and Web UI/route gate.
+7. Create a cited pack at `<investigation-root>/docs/packs/<endpoint-slug>.md` from [endpoint-pack.md](endpoint-pack.md), and update its row in `<investigation-root>/docs/registry.md`.
+8. Set the verdict to `Insufficient evidence` when any layer is unverified.
 
 ## Review rules
 
