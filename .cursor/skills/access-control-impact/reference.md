@@ -9,6 +9,10 @@
 
 Do not re-prove generic BFF or S2S authentication plumbing in every pack. Trace it only if the endpoint route, credential flow, user-context propagation, or tenant binding differs from this baseline.
 
+Per-endpoint analysis traces callers, effective feature mapping, tenant-identifier
+propagation, and existing UI/BFF eligibility gates. Write human-review artefacts
+to `<investigation-root>/docs/packs/` and `<investigation-root>/docs/registry.md`.
+
 ## Mapping layers
 
 Reconcile these four layers for every endpoint:

@@ -35,12 +35,12 @@ Do not re-trace generic BFF or S2S token plumbing unless a route differs from th
 
 ## Workflow
 
-1. Read `<investigation-root>/docs/access-model.md` and `docs/templates/endpoint-pack.md`.
+1. Read [reference.md](reference.md) and [endpoint-pack.md](endpoint-pack.md).
 2. For each endpoint, locate the SME Platform Lua route and its `feature()`.
 3. Locate the Protected API route and `PermissionMap.cs` entitlement mapping.
 4. Trace every caller and UI/BFF eligibility gate in the supplied repositories.
 5. Reconcile the Lua feature, Protected API entitlement, BFF feature calculation, and Web UI/route gate.
-6. Create a cited pack at `docs/packs/<endpoint-slug>.md`, following the template exactly, and update its row in `docs/registry.md`.
+6. Create a cited pack at `<investigation-root>/docs/packs/<endpoint-slug>.md` from [endpoint-pack.md](endpoint-pack.md), and update its row in `<investigation-root>/docs/registry.md`.
 7. Set the verdict to `Insufficient evidence` when any layer is unverified.
 
 ## Review rules
@@ -56,4 +56,4 @@ Return the updated evidence packs, registry rows, unresolved findings, and each 
 
 ## Reference
 
-Read [reference.md](reference.md) for the full baseline, reconciliation guidance, discrepancy policy, and batch-review procedure.
+Read [reference.md](reference.md) for the full baseline, reconciliation guidance, discrepancy policy, and batch-review procedure. Use [endpoint-pack.md](endpoint-pack.md) as the pack skeleton.

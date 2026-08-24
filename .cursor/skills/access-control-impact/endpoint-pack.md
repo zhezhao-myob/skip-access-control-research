@@ -1,16 +1,17 @@
 # Endpoint evidence pack template
 
 Use this template to produce one concise, cited evidence pack per SME Platform
-API endpoint. Copy the pack skeleton below into `docs/packs/<endpoint-slug>.md`
+API endpoint. Copy the pack skeleton below into
+`<investigation-root>/docs/packs/<endpoint-slug>.md`
 (for example, `docs/packs/entitlements-balance-summary-report.md`).
 
 **Consumes:** one supplied SME Platform API endpoint (method and path).
 
 **Produces:** one evidence pack suitable for human review and registry linkage.
 
-See [access-model.md](../access-model.md) for the established request baseline
+See [reference.md](reference.md) for the established request baseline
 and per-endpoint analysis scope. Update the corresponding row in
-[registry.md](../registry.md) when the pack is complete.
+`<investigation-root>/docs/registry.md` when the pack is complete.
 
 ---
 

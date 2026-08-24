@@ -9,3 +9,6 @@ Every endpoint must reconcile SME Platform API Lua `feature()`,
 AccountRight Protected API `PermissionMap.cs`, BFF feature calculation, and
 web UI gating. Any missing or conflicting mapping is a finding and blocks a
 `No expected user impact` verdict.
+
+Investigation method: `.cursor/skills/access-control-impact/`.
+Human-review artefacts: `docs/registry.md`, `docs/packs/`, `docs/reference/`.

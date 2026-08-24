@@ -1,8 +1,8 @@
 # Endpoint review registry
 
 Batch-review index for SME Platform API endpoints under skip-access-control
-investigation. See [access-model.md](access-model.md) for the established
-request baseline and per-endpoint analysis scope.
+investigation. The established request baseline and pack template live in
+`.cursor/skills/access-control-impact/`.
 
 | Endpoint | Product / feature | Callers | UI/BFF gate | Mapping status | Verdict | Residual risk | Evidence pack | Reviewer |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
